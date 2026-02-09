@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1643e13a-6516-4a88-90ee-b048c94cc091" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/myTasks/Day14Dop/SecurityException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/myTasks/Day14Dop/TeleportSession.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/study.iml" beforeDir="false" afterPath="$PROJECT_DIR$/study.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaForBegginers/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaForBegginers/day15/Task1.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaForBegginers/day15/Task1.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,43 +40,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "Application.Date.executor": "Run",
-    "Application.LostTaskAbstract.executor": "Run",
-    "Application.MainTask.executor": "Run",
-    "Application.Task1.executor": "Run",
-    "Application.Task1Day7.executor": "Run",
-    "Application.Task1Day8.executor": "Run",
-    "Application.Task1Day8Part2.executor": "Run",
-    "Application.Task1day5.executor": "Run",
-    "Application.Task2.executor": "Run",
-    "Application.Task2Day6.executor": "Run",
-    "Application.Task2Day7.executor": "Run",
-    "Application.Task2Day8.executor": "Run",
-    "Application.Task2day5.executor": "Run",
-    "Application.Task3.executor": "Run",
-    "Application.Task3Day6.executor": "Run",
-    "Application.Task4.executor": "Run",
-    "Application.Task5.executor": "Run",
-    "Application.TaskMain.executor": "Run",
-    "Application.TestFigures.executor": "Run",
-    "Application.TheOtherDetector.executor": "Run",
-    "Application.mainTask.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/andrew/study/java/day11/task1",
-    "settings.editor.selected.configurable": "preferences.keymap"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;Application.Date.executor&quot;: &quot;Run&quot;,
+    &quot;Application.LostTaskAbstract.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MainTask.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Task1.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Task1Day7.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Task1Day8.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Task1Day8Part2.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Task1day5.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Task2.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Task2Day6.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Task2Day7.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Task2Day8.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Task2day5.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Task3.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Task3Day6.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Task4.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Task5.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TaskMain.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TestFigures.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TheOtherDetector.executor&quot;: &quot;Run&quot;,
+    &quot;Application.mainTask.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/andrew/study/java/day11/task1&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="day14" />
@@ -88,6 +89,7 @@
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\andrew\study\java" />
+      <recent name="C:\Users\andrew\study\java\JavaForBegginers" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="day12.task5" />

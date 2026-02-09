@@ -9,9 +9,9 @@ import java.util.Scanner;
 public class Task1 {
     public static void main(String[] args) {
         String separator = File.separator;
-        String path = "src" + separator + "main" + separator + "resources" + separator + "shoes.csv";
+        String path = "resources" + separator + "shoes.csv";
         File file = new File(path);
-        File file1 = new File("src/main/resources/missing_shoes.txt");
+        File file1 = new File("resources/missing_shoes.txt");
         file1.getParentFile().mkdirs();
 
         try (Scanner scanner = new Scanner(file, StandardCharsets.UTF_8);
