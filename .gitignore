@@ -1,3 +1,4 @@
-JavaForBegginers/.idea
-.idea
-out
+.idea/
+*.iml
+out/
+gen/
