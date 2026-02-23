@@ -42,7 +42,7 @@ public class Tree {
                     }
                 } else {
                     currentNode = currentNode.getRightChild();
-                    if (currentNode == null){
+                    if (currentNode == null) {
                         parentNode.setRightChild(newNode);
                         return;
                     }
@@ -50,6 +50,57 @@ public class Tree {
             }
         }
     }
+
+    public boolean deleteNode(int value){
+        Node currentNode = rootNode;
+        Node parentNode = rootNode;
+        boolean isLeftChild = true;
+        while(currentNode.getValue()!=value){
+            parentNode = currentNode;
+            if (value< currentNode.getValue()){
+                currentNode = currentNode.getLeftChild();
+                isLeftChild = true;
+            } else {
+                currentNode = currentNode.getRightChild();
+                isLeftChild = false;
+            }
+            if (currentNode == null){
+                return false;
+            }
+        }
+        if (currentNode.getLeftChild() == null && currentNode.getRightChild() == null){
+            if (currentNode == rootNode){
+                rootNode = null;
+            } else if (isLeftChild){
+                parentNode.setLeftChild(null);
+            } else {
+                parentNode.setRightChild(null);
+            }
+        } else if (currentNode.getRightChild() == null){
+            if (currentNode == rootNode){
+                rootNode = currentNode.getLeftChild();
+            }
+            else if (isLeftChild){
+                parentNode.setLeftChild(currentNode.getLeftChild());
+            } else {
+                parentNode.setLeftChild(currentNode.getRightChild());
+            }
+        } else if (currentNode.getLeftChild()==null){
+            if (currentNode==rootNode){
+                rootNode = currentNode.getRightChild();
+            }
+            else if (isLeftChild){
+                parentNode.setLeftChild(currentNode.getRightChild());
+            } else {
+                parentNode.setRightChild(currentNode.getRightChild());
+            }
+        }
+
+
+
+    }
+
+
 
 
 }
