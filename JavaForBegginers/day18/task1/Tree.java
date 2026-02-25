@@ -1,5 +1,7 @@
 package day18.task1;
 
+import java.util.Stack;
+
 public class Tree {
     private Node rootNode;
 
@@ -7,10 +9,10 @@ public class Tree {
         rootNode = null;
     }
 
-    public Node findNodeByValue(int value) {
+    public Node findNodeByValue(int value){
         Node currentNode = rootNode;
-        while (value != currentNode.getValue()) {
-            if (value < currentNode.getValue()) {
+        while(value!= currentNode.getValue()){
+            if (value< currentNode.getValue()){
                 currentNode = currentNode.getLeftChild();
             } else {
                 currentNode = currentNode.getRightChild();
@@ -121,5 +123,35 @@ public class Tree {
         return heirNode;
     }
 
+    public void printTree() {
+        Stack<Node> globalStack = new Stack<>();
+        globalStack.push(rootNode);
+        boolean isRowEmpty = false;
+        while (isRowEmpty == false) {
+            Stack<Node> localStack = new Stack<>();
+            isRowEmpty = true;
+            while (globalStack.isEmpty() == false) {
+                Node temp = globalStack.pop();
+                if (temp != null) {
+                    System.out.print(temp.getValue() + " ");
+
+                    localStack.push(temp.getLeftChild());
+                    localStack.push(temp.getRightChild());
+                    if (temp.getLeftChild() != null || temp.getRightChild() != null) {
+                        isRowEmpty = false;
+                    }
+                } else {
+                    System.out.print("---");
+                    localStack.push(null);
+                    localStack.push(null);
+                }
+            }
+            System.out.println();
+
+            while (localStack.isEmpty() == false) {
+                globalStack.push(localStack.pop());
+            }
+        }
+    }
 
 }
