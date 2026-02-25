@@ -51,56 +51,75 @@ public class Tree {
         }
     }
 
-    public boolean deleteNode(int value){
+    public boolean deleteNode(int value) {
         Node currentNode = rootNode;
         Node parentNode = rootNode;
         boolean isLeftChild = true;
-        while(currentNode.getValue()!=value){
+        while (currentNode.getValue() != value) {
             parentNode = currentNode;
-            if (value< currentNode.getValue()){
+            if (value < currentNode.getValue()) {
                 currentNode = currentNode.getLeftChild();
                 isLeftChild = true;
             } else {
                 currentNode = currentNode.getRightChild();
                 isLeftChild = false;
             }
-            if (currentNode == null){
+            if (currentNode == null) {
                 return false;
             }
         }
-        if (currentNode.getLeftChild() == null && currentNode.getRightChild() == null){
-            if (currentNode == rootNode){
+        if (currentNode.getLeftChild() == null && currentNode.getRightChild() == null) {
+            if (currentNode == rootNode) {
                 rootNode = null;
-            } else if (isLeftChild){
+            } else if (isLeftChild) {
                 parentNode.setLeftChild(null);
             } else {
                 parentNode.setRightChild(null);
             }
-        } else if (currentNode.getRightChild() == null){
-            if (currentNode == rootNode){
+        } else if (currentNode.getRightChild() == null) {
+            if (currentNode == rootNode) {
                 rootNode = currentNode.getLeftChild();
-            }
-            else if (isLeftChild){
+            } else if (isLeftChild) {
                 parentNode.setLeftChild(currentNode.getLeftChild());
             } else {
                 parentNode.setLeftChild(currentNode.getRightChild());
             }
-        } else if (currentNode.getLeftChild()==null){
-            if (currentNode==rootNode){
+        } else if (currentNode.getLeftChild() == null) {
+            if (currentNode == rootNode) {
                 rootNode = currentNode.getRightChild();
-            }
-            else if (isLeftChild){
+            } else if (isLeftChild) {
                 parentNode.setLeftChild(currentNode.getRightChild());
             } else {
                 parentNode.setRightChild(currentNode.getRightChild());
             }
+        } else {
+            Node heirNode = receiveHeir(currentNode);
+            if (currentNode == rootNode) {
+                rootNode = heirNode;
+            } else if (isLeftChild) {
+                parentNode.setLeftChild(heirNode);
+            } else {
+                parentNode.setRightChild(heirNode);
+            }
         }
-
-
-
+        return true;
     }
 
-
+    private Node receiveHeir(Node node) {
+        Node parentNode = node;
+        Node currentNode = node;
+        Node heirNode = node;
+        while (currentNode != null) {
+            parentNode = heirNode;
+            heirNode = currentNode;
+            currentNode = currentNode.getRightChild();
+            if (heirNode != node.getRightChild()) {
+                parentNode.setLeftChild(heirNode.getRightChild());
+                heirNode.setRightChild(node.getRightChild());
+            }
+        }
+        return heirNode;
+    }
 
 
 }
