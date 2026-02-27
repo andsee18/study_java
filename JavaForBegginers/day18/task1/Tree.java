@@ -57,10 +57,10 @@ public class Tree {
 
     public boolean deleteNode(int value) {
         Node currentNode = rootNode;
-        Node parentNode = rootNode;
+        Node parrentNode = rootNode;
         boolean isLeftChild = false;
         while (value != currentNode.getValue()) {
-            parentNode = currentNode;
+            parrentNode = currentNode;
             if (value < currentNode.getValue()) {
                 currentNode = currentNode.getLeftChild();
                 isLeftChild = true;
@@ -76,50 +76,51 @@ public class Tree {
             if (currentNode == rootNode) {
                 rootNode = null;
             } else if (isLeftChild) {
-                parentNode.setLeftChild(null);
+                parrentNode.setLeftChild(null);
             } else {
-                parentNode.setRightChild(null);
+                parrentNode.setRightChild(null);
             }
             return true;
         } else if (currentNode.getRightChild() == null) {
             if (currentNode == rootNode) {
                 rootNode = currentNode.getLeftChild();
             } else if (isLeftChild) {
-                parentNode.setLeftChild(currentNode.getLeftChild());
+                parrentNode.setLeftChild(currentNode.getLeftChild());
             } else {
-                parentNode.setRightChild(currentNode.getLeftChild());
+                parrentNode.setRightChild(currentNode.getLeftChild());
             }
             return true;
         } else if (currentNode.getLeftChild() == null) {
             if (currentNode == rootNode) {
                 rootNode = currentNode.getRightChild();
             } else if (isLeftChild) {
-                parentNode.setLeftChild(currentNode.getRightChild());
+                parrentNode.setLeftChild(currentNode.getRightChild());
             } else {
-                parentNode.setRightChild(currentNode.getRightChild());
+                parrentNode.setRightChild((currentNode.getRightChild()));
             }
             return true;
         } else {
             Node heir = receiveHeir(currentNode);
-            if (currentNode == rootNode){
+            if (currentNode == rootNode) {
                 rootNode = heir;
-            } else if (isLeftChild){
-                parentNode.setLeftChild(heir);
+            } else if (isLeftChild) {
+                parrentNode.setLeftChild(heir);
             } else {
-                parentNode.setRightChild(heir);
+                parrentNode.setRightChild(heir);
             }
             return true;
         }
+
     }
 
     private Node receiveHeir(Node node) {
         Node parentNode = node;
-        Node currentNode = node;
         Node heirNode = node;
+        Node currentNode = node.getRightChild();
         while (currentNode != null) {
             parentNode = heirNode;
             heirNode = currentNode;
-            currentNode = currentNode.getRightChild();
+            currentNode = currentNode.getLeftChild();
             if (heirNode != node.getRightChild()) {
                 parentNode.setLeftChild(heirNode.getRightChild());
                 heirNode.setRightChild(node.getRightChild());
