@@ -9,10 +9,13 @@ public class Tree {
         rootNode = null;
     }
 
-    public Node findNodeByValue(int value){
+    public Node findNode(int value) {
         Node currentNode = rootNode;
-        while(value!= currentNode.getValue()){
-            if (value< currentNode.getValue()){
+        if (rootNode == null) {
+            return null;
+        }
+        while (value != currentNode.getValue()) {
+            if (value < currentNode.getValue()) {
                 currentNode = currentNode.getLeftChild();
             } else {
                 currentNode = currentNode.getRightChild();
@@ -25,39 +28,38 @@ public class Tree {
     }
 
     public void insertNode(int value) {
-        Node newNode = new Node();
-        newNode.setValue(value);
+        Node node = new Node();
+        node.setValue(value);
         if (rootNode == null) {
-            rootNode = newNode;
+            rootNode = node;
         } else {
             Node currentNode = rootNode;
-            Node parentNode;
+            Node parrentNode;
             while (true) {
-                parentNode = currentNode;
-                if (value == currentNode.getValue()) {
-                    return;
-                } else if (value < currentNode.getValue()) {
+                parrentNode = currentNode;
+                if (value < currentNode.getValue()) {
                     currentNode = currentNode.getLeftChild();
                     if (currentNode == null) {
-                        parentNode.setLeftChild(newNode);
+                        parrentNode.setLeftChild(node);
                         return;
                     }
                 } else {
                     currentNode = currentNode.getRightChild();
                     if (currentNode == null) {
-                        parentNode.setRightChild(newNode);
+                        parrentNode.setRightChild(node);
                         return;
                     }
                 }
             }
         }
+
     }
 
     public boolean deleteNode(int value) {
         Node currentNode = rootNode;
         Node parentNode = rootNode;
-        boolean isLeftChild = true;
-        while (currentNode.getValue() != value) {
+        boolean isLeftChild = false;
+        while (value != currentNode.getValue()) {
             parentNode = currentNode;
             if (value < currentNode.getValue()) {
                 currentNode = currentNode.getLeftChild();
@@ -78,14 +80,16 @@ public class Tree {
             } else {
                 parentNode.setRightChild(null);
             }
+            return true;
         } else if (currentNode.getRightChild() == null) {
             if (currentNode == rootNode) {
                 rootNode = currentNode.getLeftChild();
             } else if (isLeftChild) {
                 parentNode.setLeftChild(currentNode.getLeftChild());
             } else {
-                parentNode.setLeftChild(currentNode.getRightChild());
+                parentNode.setRightChild(currentNode.getLeftChild());
             }
+            return true;
         } else if (currentNode.getLeftChild() == null) {
             if (currentNode == rootNode) {
                 rootNode = currentNode.getRightChild();
@@ -94,17 +98,18 @@ public class Tree {
             } else {
                 parentNode.setRightChild(currentNode.getRightChild());
             }
+            return true;
         } else {
-            Node heirNode = receiveHeir(currentNode);
-            if (currentNode == rootNode) {
-                rootNode = heirNode;
-            } else if (isLeftChild) {
-                parentNode.setLeftChild(heirNode);
+            Node heir = receiveHeir(currentNode);
+            if (currentNode == rootNode){
+                rootNode = heir;
+            } else if (isLeftChild){
+                parentNode.setLeftChild(heir);
             } else {
-                parentNode.setRightChild(heirNode);
+                parentNode.setRightChild(heir);
             }
+            return true;
         }
-        return true;
     }
 
     private Node receiveHeir(Node node) {
