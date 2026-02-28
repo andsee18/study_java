@@ -121,11 +121,12 @@ public class Tree {
             parentNode = heirNode;
             heirNode = currentNode;
             currentNode = currentNode.getLeftChild();
-            if (heirNode != node.getRightChild()) {
-                parentNode.setLeftChild(heirNode.getRightChild());
-                heirNode.setRightChild(node.getRightChild());
-            }
         }
+        if (heirNode != node.getRightChild()) {
+            parentNode.setLeftChild(heirNode.getRightChild());
+            heirNode.setRightChild(node.getRightChild());
+        }
+        heirNode.setLeftChild(node.getRightChild());
         return heirNode;
     }
 
