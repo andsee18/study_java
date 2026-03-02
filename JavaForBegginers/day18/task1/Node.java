@@ -5,6 +5,7 @@ public class Node {
     private Node leftChild;
     private Node rightChild;
 
+
     public void printNode(){
         System.out.println("Значение узла: "+ value);
     }
@@ -34,11 +35,7 @@ public class Node {
     }
     @Override
     public String toString(){
-        return "Node{ "+
-                "value="+value+
-                ", leftChild="+leftChild+
-                ", rightChild="+rightChild+
-                "}";
+        return "Node{value="+value+"}";
     }
 
 }

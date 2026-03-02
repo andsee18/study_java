@@ -1,19 +1,14 @@
 package day18.task1;
 
-import java.util.Stack;
-
 public class Tree {
-    private Node rootNode;
+    public Node rootNode;
 
     public Tree() {
         rootNode = null;
     }
 
-    public Node findNode(int value) {
+    public Node findValue(int value) {
         Node currentNode = rootNode;
-        if (rootNode == null) {
-            return null;
-        }
         while (value != currentNode.getValue()) {
             if (value < currentNode.getValue()) {
                 currentNode = currentNode.getLeftChild();
@@ -34,131 +29,108 @@ public class Tree {
             rootNode = node;
         } else {
             Node currentNode = rootNode;
-            Node parrentNode;
+            Node parentNode;
             while (true) {
-                parrentNode = currentNode;
+                parentNode = currentNode;
                 if (value < currentNode.getValue()) {
                     currentNode = currentNode.getLeftChild();
                     if (currentNode == null) {
-                        parrentNode.setLeftChild(node);
+                        parentNode.setLeftChild(node);
                         return;
                     }
                 } else {
                     currentNode = currentNode.getRightChild();
                     if (currentNode == null) {
-                        parrentNode.setRightChild(node);
+                        parentNode.setRightChild(node);
                         return;
                     }
                 }
             }
         }
-
     }
 
-    public boolean deleteNode(int value) {
-        Node currentNode = rootNode;
-        Node parrentNode = rootNode;
+    public boolean delNode(int value) {
+        Node current = rootNode;
+        Node parent = rootNode;
         boolean isLeftChild = false;
-        while (value != currentNode.getValue()) {
-            parrentNode = currentNode;
-            if (value < currentNode.getValue()) {
-                currentNode = currentNode.getLeftChild();
+        while (value != current.getValue()) {
+            parent = current;
+            if (value < current.getValue()) {
+                current = current.getLeftChild();
                 isLeftChild = true;
             } else {
-                currentNode = currentNode.getRightChild();
+                current = current.getRightChild();
                 isLeftChild = false;
             }
-            if (currentNode == null) {
+            if (current == null) {
                 return false;
             }
         }
-        if (currentNode.getLeftChild() == null && currentNode.getRightChild() == null) {
-            if (currentNode == rootNode) {
+        if (current.getLeftChild() == null && current.getRightChild() == null) {
+            if (current == rootNode) {
                 rootNode = null;
             } else if (isLeftChild) {
-                parrentNode.setLeftChild(null);
+                parent.setLeftChild(null);
             } else {
-                parrentNode.setRightChild(null);
+                parent.setRightChild(null);
             }
             return true;
-        } else if (currentNode.getRightChild() == null) {
-            if (currentNode == rootNode) {
-                rootNode = currentNode.getLeftChild();
+        } else if (current.getRightChild() == null) {
+            if (current == rootNode) {
+                rootNode = current.getLeftChild();
             } else if (isLeftChild) {
-                parrentNode.setLeftChild(currentNode.getLeftChild());
+                parent.setLeftChild(current.getLeftChild());
             } else {
-                parrentNode.setRightChild(currentNode.getLeftChild());
+                parent.setRightChild(current.getLeftChild());
             }
             return true;
-        } else if (currentNode.getLeftChild() == null) {
-            if (currentNode == rootNode) {
-                rootNode = currentNode.getRightChild();
+        } else if (current.getLeftChild() == null) {
+            if (current == rootNode) {
+                rootNode = current.getRightChild();
             } else if (isLeftChild) {
-                parrentNode.setLeftChild(currentNode.getRightChild());
+                parent.setLeftChild(current.getRightChild());
             } else {
-                parrentNode.setRightChild((currentNode.getRightChild()));
+                parent.setRightChild(current.getRightChild());
             }
             return true;
         } else {
-            Node heir = receiveHeir(currentNode);
-            if (currentNode == rootNode) {
+            Node heir = receiveHeir(current);
+            if (current == rootNode) {
                 rootNode = heir;
             } else if (isLeftChild) {
-                parrentNode.setLeftChild(heir);
+                parent.setLeftChild(heir);
             } else {
-                parrentNode.setRightChild(heir);
+                parent.setRightChild(heir);
             }
             return true;
         }
-
     }
 
-    private Node receiveHeir(Node node) {
-        Node parentNode = node;
-        Node heirNode = node;
-        Node currentNode = node.getRightChild();
-        while (currentNode != null) {
-            parentNode = heirNode;
-            heirNode = currentNode;
-            currentNode = currentNode.getLeftChild();
+    public Node receiveHeir(Node node) {
+        Node parent = node;
+        Node heir = node;
+        Node current = node.getRightChild();
+        while (current != null) {
+            parent = heir;
+            heir = current;
+            current = current.getLeftChild();
         }
-        if (heirNode != node.getRightChild()) {
-            parentNode.setLeftChild(heirNode.getRightChild());
-            heirNode.setRightChild(node.getRightChild());
+        if (heir != node.getRightChild()) {
+            parent.setLeftChild(heir.getRightChild());
+            heir.setRightChild(node.getRightChild());
         }
-        heirNode.setLeftChild(node.getRightChild());
-        return heirNode;
+        heir.setLeftChild(node.getLeftChild());
+        return heir;
     }
 
-    public void printTree() {
-        Stack<Node> globalStack = new Stack<>();
-        globalStack.push(rootNode);
-        boolean isRowEmpty = false;
-        while (isRowEmpty == false) {
-            Stack<Node> localStack = new Stack<>();
-            isRowEmpty = true;
-            while (globalStack.isEmpty() == false) {
-                Node temp = globalStack.pop();
-                if (temp != null) {
-                    System.out.print(temp.getValue() + " ");
-
-                    localStack.push(temp.getLeftChild());
-                    localStack.push(temp.getRightChild());
-                    if (temp.getLeftChild() != null || temp.getRightChild() != null) {
-                        isRowEmpty = false;
-                    }
-                } else {
-                    System.out.print("---");
-                    localStack.push(null);
-                    localStack.push(null);
-                }
-            }
-            System.out.println();
-
-            while (localStack.isEmpty() == false) {
-                globalStack.push(localStack.pop());
-            }
+    public void dfs(Node node) {
+        if (node == null) {
+            return;
         }
+        dfs(node.getLeftChild());
+        System.out.println(node);
+        dfs(node.getRightChild());
     }
+
 
 }
