@@ -128,7 +128,7 @@ public class Tree {
             return;
         }
         dfs(node.getLeftChild());
-        System.out.println(node);
+        System.out.println(node.getValue());
         dfs(node.getRightChild());
     }
 
