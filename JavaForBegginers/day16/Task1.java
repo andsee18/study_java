@@ -1,4 +1,4 @@
-package JavaForBegginers.day16;
+package day16;
 
 import java.io.File;
 import java.io.FileNotFoundException;
