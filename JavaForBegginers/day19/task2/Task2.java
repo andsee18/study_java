@@ -9,8 +9,9 @@ import java.util.Scanner;
 public class Task2 {
     public static void main(String[] args) {
         File file = new File("resources/taxi.txt");
+        HashMap<Integer, Point> taxiMap;
         try (Scanner sc = new Scanner(file)) {
-            HashMap<Integer, Point> taxiMap = new HashMap<>();
+            taxiMap = new HashMap<>();
             while (sc.hasNext()) {
                 int index = sc.nextInt();
                 int x = sc.nextInt();
@@ -21,14 +22,5 @@ public class Task2 {
             throw new RuntimeException(e);
         }
         Scanner scan = new Scanner(System.in);
-        for (Map.Entry<Integer, Point> entry : taxiMap.entrySet())
-            int x1 = scan.nextInt();
-        int y1 = scan.nextInt();
-        int x2 = scan.nextInt();
-        int y2 = scan.nextInt();
-        Point point1 = new Point(x1, y1);
-        Point point2 = new Point(x2, y2);
-
-
+        for (Map.Entry<Integer, Point> entry : )
     }
-}
