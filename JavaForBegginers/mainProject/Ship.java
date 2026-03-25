@@ -1,39 +1,40 @@
 package mainProject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Ship {
-    private int length;
-    private int x;
-    private int y;
+    private List<int[]> coordinates = new ArrayList<>();
+    private List<int[]> hitCoordinates = new ArrayList<>();
 
-    public Ship (int x, int y, int length){
-        this.x = x;
-        this.y = y;
-        this.length = length;
+    public Ship(List<int[]> coordinates) {
+        this.coordinates = coordinates;
     }
 
-    public int getLength() {
-        return length;
+    public List<int[]> getCoordinates() {
+        return coordinates;
     }
 
-    public int getX() {
-        return x;
+    public void hit(int x, int y) {
+        // проверяем, есть ли такая координата в корабле и не была ли она уже подбита
+        for (int[] coord : coordinates) {
+            if (coord[0] == x && coord[1] == y) {
+                boolean alreadyHit = false;
+                for (int[] hit : hitCoordinates) {
+                    if (hit[0] == x && hit[1] == y) {
+                        alreadyHit = true;
+                        break;
+                    }
+                }
+                if (!alreadyHit) {
+                    hitCoordinates.add(new int[]{x, y});
+                }
+                return;
+            }
+        }
     }
 
-    public int getY() {
-        return y;
+    public boolean isSunk() {
+        return hitCoordinates.size() == coordinates.size();
     }
-
-    public void setLength(int length) {
-        this.length = length;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-
 }
