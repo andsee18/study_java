@@ -1,5 +1,13 @@
 package multithreading.threadpools_and_pc;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class Task3 {
     // Задача 3: Логистический центр (Producer-Consumer + Thread Pool)
     // 
@@ -16,9 +24,44 @@ public class Task3 {
     //    При взятии ящика грузчик выводит "Грузчик X забрал ящик Y" и тратит 1 секунду на его расстановку.
     // 5. ДОПОЛНИТЕЛЬНАЯ СЛОЖНОСТЬ (подумай над этим сам): как сделать так, чтобы пул грузчиков корректно 
     //    был остановлен (shutdown), когда все поставщики закончат свою работу и все ящики будут перенесены (очередь станет пустой)?
-    
+    public static  BlockingQueue<Integer> queue = new ArrayBlockingQueue<>(10);
     public static void main(String[] args) {
-        // Твой код здесь
+        ExecutorService consumer = Executors.newFixedThreadPool(5);
+        List<Thread> threads = new ArrayList<>(3);
+        for(Thread thr: threads){
+            thr.
+        }
+
+
+
+
+//        Scanner scanner = new Scanner(System.in);
+        while(true)
+            consumer.submit(new Consumers());
+        consumer.shutdown();
+
+
+
+    }
+
+    public static void produce() throws InterruptedException {
+        for(int i=1;i<16;i++){
+            queue.put(i);
+            System.out.println("Поставщик N "+ Thread.currentThread().getId()+" привёз ящик " + i);
+            Thread.sleep(300);
+        }
+    }
+}
+
+class Consumer implements Runnable{
+
+    @Override
+    public void run() {
+        try {
+            Task3.queue.take();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 
