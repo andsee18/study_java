@@ -3,10 +3,7 @@ package multithreading.threadpools_and_pc;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 public class Task3 {
     // Задача 3: Логистический центр (Producer-Consumer + Thread Pool)
@@ -24,44 +21,71 @@ public class Task3 {
     //    При взятии ящика грузчик выводит "Грузчик X забрал ящик Y" и тратит 1 секунду на его расстановку.
     // 5. ДОПОЛНИТЕЛЬНАЯ СЛОЖНОСТЬ (подумай над этим сам): как сделать так, чтобы пул грузчиков корректно 
     //    был остановлен (shutdown), когда все поставщики закончат свою работу и все ящики будут перенесены (очередь станет пустой)?
-    public static  BlockingQueue<Integer> queue = new ArrayBlockingQueue<>(10);
-    public static void main(String[] args) {
+    public static BlockingQueue<Integer> queue = new ArrayBlockingQueue<>(10);
+
+    public static void main(String[] args) throws InterruptedException {
+        List<Thread> producers = new ArrayList<>(3);
         ExecutorService consumer = Executors.newFixedThreadPool(5);
-        List<Thread> threads = new ArrayList<>(3);
-        for(Thread thr: threads){
-            thr.
+        for (int i = 0; i < 3; i++) {
+            producers.add(i, new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        produce();
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }));
+        }
+        for (Thread thr : producers) {
+            thr.start();
+        }
+        for(int i =0;i<5;i++)
+            consumer.submit(new Consumer());
+        consumer.shutdown();
+        for (Thread thr : producers) {
+            try {
+                thr.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
 
+        for (int i = 0; i < 5; i++) {
+            queue.put(-1);
+        }
 
-
-
-//        Scanner scanner = new Scanner(System.in);
-        while(true)
-            consumer.submit(new Consumers());
-        consumer.shutdown();
-
+        consumer.awaitTermination(1, TimeUnit.DAYS);
 
 
     }
 
     public static void produce() throws InterruptedException {
-        for(int i=1;i<16;i++){
+        for (int i = 1; i < 16; i++) {
             queue.put(i);
-            System.out.println("Поставщик N "+ Thread.currentThread().getId()+" привёз ящик " + i);
+            System.out.println("Поставщик N " + Thread.currentThread().getId() + " привёз ящик " + i);
             Thread.sleep(300);
         }
     }
 }
 
-class Consumer implements Runnable{
+class Consumer implements Runnable {
 
     @Override
     public void run() {
         try {
-            Task3.queue.take();
+            while (true) {
+                int value = Task3.queue.take();
+                if (value == -1) {
+                    break;
+                } else {
+                    System.out.println("грузчик " + Thread.currentThread().getId() + " забрал ящик " + value);
+                    Thread.sleep(1000);
+                }
+            }
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
 }
-
